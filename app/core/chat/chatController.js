@@ -13,11 +13,14 @@
             vm.displayMessage   = displayMessage;
             vm.newEvent         = newEvent;
             vm.sendMessage      = sendMessage;
+            vm.controlaAbreFecha = controlaAbreFecha;
 
             vm.imgSom = 'fa fa-volume-off';
             vm.ativaVoz = false;
             vm.showSom = false;
             vm.showLog = false;
+            vm.abreFecha = {'animation-name': 'popup_open'};
+            vm.isOpen = true;
 
             var params = {};
             var context = '';
@@ -120,7 +123,7 @@
 
                      var divHora = document.createElement('div');
                      var textHora= document.createTextNode(addZero(new Date().getDate())+"/"+(addZero(new Date().getMonth()+1))+"  "+addZero(new Date().getHours())+":"+addZero(new Date().getMinutes()));
-                     divHora.style='text-align:left;color:#cfcfcf;font-size:12px;padding-right:50px';
+                     divHora.setAttribute("class", "dataHoraUser" );
                      divHora.appendChild(textHora);
 
                      var user = document.createTextNode(' ');
@@ -128,10 +131,7 @@
                      userBox.className = 'direct-chat-name pull-left';
                      div0.className = 'direct-chat-msg right';
                      div.className = 'direct-chat-text';
-                     var img = document.createElement('img');
-                     img.className = 'direct-chat-img';
-                     img.src = 'assets/images/img_usuario.png';
-                     div0.appendChild(img);
+
                      div0.appendChild(div);
 
                      userBox.appendChild(user);
@@ -150,9 +150,6 @@
 
                     var user = document.createTextNode(' ');
                     var userBox = document.createElement('span');
-                    user = document.createElement('img');
-                    user.className = 'direct-chat-img';
-                    user.src = 'assets/images/logo_fb.jpg';
                     div.className = 'direct-chat-text';
 
                     userBox.appendChild(user);
@@ -186,7 +183,7 @@
 
                         var divHora = document.createElement('div');
                         var textHora= document.createTextNode(addZero(new Date().getDate())+"/"+(addZero(new Date().getMonth()+1))+"  "+addZero(new Date().getHours())+":"+addZero(new Date().getMinutes()));
-                        divHora.style='text-align:right;color:#cfcfcf;font-size:12px';
+                        divHora.setAttribute("class", "dataHora" );
                         divHora.appendChild(textHora);
                         messageBox.appendChild(divHora);
 
@@ -241,6 +238,16 @@
                }
 
            }
+
+           function controlaAbreFecha(){
+              if(vm.isOpen){
+                  vm.isOpen = false;
+                  vm.abreFecha = {'animation-name': 'popup_close'};
+              }else{
+                  vm.isOpen = true;
+                  vm.abreFecha = {'animation-name': 'popup_open'};
+              }
+          }
 
            function showSound(){
 
