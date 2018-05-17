@@ -82,7 +82,8 @@
                     text = text.replace(/(\r\n|\n|\r)/gm, ""); // Remove erroneous characters
 
                     if (text) {
-                        $("#chatInput").css("border-color", "#d2d6de");
+                        $("#chatInput").addClass("ok");
+                        $("#chatInput").removeClass("erro");
                         displayMessage(text, 'user');
                         userInput.value = '';
                         userMessage(text);
@@ -90,7 +91,8 @@
                     } else {
                         console.error("No message.");
                         userInput.value = '';
-                        $("#chatInput").css("border-color", "red");
+                        $("#chatInput").addClass("erro");
+                        $("#chatInput").removeClass("ok");
                         return false;
                     }
                 }
@@ -99,11 +101,13 @@
             function sendMessage() {
 
                 if($("#chatInput").val()==''){
-                    $("#chatInput").css("border-color", "red");
+                    $("#chatInput").addClass("erro");
+                    $("#chatInput").removeClass("ok");
                    return;
                 }
 
-                $("#chatInput").css("border-color", "#d2d6de");
+               $("#chatInput").addClass("ok");
+               $("#chatInput").removeClass("erro");
                 var message = document.getElementById('chatInput');
                 var texto = message.value;
                 texto = texto.replace(/(\r\n|\n|\r)/gm, "");
