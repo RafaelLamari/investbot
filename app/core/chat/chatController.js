@@ -49,8 +49,29 @@
                                 console.error('Server error for Conversation. Return status of: ', xhr.statusText);
                                 displayMessage("Ops, acho que meu cérebro está offline.", watson);
                             } else {
+
                                 text = response.data.output.text;
                                 context = response.data.context; // Store the context for next round of questions
+
+                                if(response.data.output.nodes_visited == 'Em outros casos'){
+
+                                    var logData = {
+                                        idchat: response.data.context.conversation_id,
+                                        texto: response.data.input.text
+                                    }
+
+                                    $http.post('/treinar', logData)
+                                        .then(Success)
+                                        .catch(Failure);
+
+                                    function Success(response) {
+                                        return response.data;
+                                    }
+
+                                    function Failure(error) {
+                                        console.log('Error: ' + JSON.stringify(error));
+                                    }
+                                }
 
                                 if (vm.showLog){
                                     console.log("Got response from Watson: ", JSON.stringify(response));

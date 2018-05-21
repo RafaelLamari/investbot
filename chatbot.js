@@ -5,6 +5,7 @@ var params = require('./api/parameters.js');
 var discovery = require('./api/discovery.js');
 var nlu = require('./api/nlu.js');
 var textToSpeech = require('./api/text-to-speech.js');
+var cloudant = require('./api/cloudant.js');
 
 // =====================================
 // WATSON CONVERSATION FOR ANA =========
@@ -12,6 +13,7 @@ var textToSpeech = require('./api/text-to-speech.js');
 app.post('/api/watson', function (req, res) {
     processChatMessage(req, res);
 });
+app.post('/treinar',cloudant.gravaOutros);
 
 app.get('/api/discovery/:texto/:full', function (req, res) {
     discovery.get(req, res);
